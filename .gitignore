@@ -9,3 +9,6 @@ test.py
 
 # Tailwind and node dependencies
 node_modules/
+
+# Cookies
+cookies/
