@@ -28,24 +28,12 @@ async def home(request: Request):
 async def download(request: VideoRequest):
     """ Download a video or audio based on the frontend request """
     url = request.url
-    ydl_opts = {
-        'quiet': True,
-        'extract_flat': True,
-    }
+    print(request)
     
     try:
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=False)
-            if not info:
-                raise HTTPException(status_code=400, detail="Could not retrieve video info")
-            
-            video_data = {
-                "title": info.get("title"),
-                "author": info.get("uploader"),
-                "thumbnail": info.get("thumbnail"),
-                "resolutions": sorted(set(f["format_note"] for f in info.get("formats", []) if "format_note" in f))
-            }
-            return video_data
+        video = await download_video(url)
+        print(video)
+        return FileResponse(path=f"{video}", media_type="video/mp4" )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

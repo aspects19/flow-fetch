@@ -85,9 +85,9 @@ def download_audio(video_url, output_path, thumb):
     except Exception as e:
         print(f"Audio download failed: {e}")
 
-def download_video(url, output_path="downloads/%(title)s.%(ext)s",):
+async def download_video(url ):
     """Downloads video with user-selected format."""
-
+    output_path="downloads/%(title)s.%(ext)s"
     ydl_opts = {
             'format': 'bestvideo+bestaudio/best',
             'merge_output_format': 'mp4',
@@ -101,7 +101,12 @@ def download_video(url, output_path="downloads/%(title)s.%(ext)s",):
         #     ydl_opts['cookiefile'] = 'cookies/youtube.txt'
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([url])
+            video_info = ydl.extract_info(url, download=True)
+            video_file = ydl.prepare_filename(video_info)
+
+        print(video_file)
+        return str(video_file)
+       
     except Exception as e:
         print(f"Video download failed: {e}")
 

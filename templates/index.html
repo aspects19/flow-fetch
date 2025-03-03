@@ -106,7 +106,7 @@
 
             // Send request to FastAPI backend
             const response = await fetch("/download", {
-                method: "GET",
+                method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
                     url: videoData.url, 
