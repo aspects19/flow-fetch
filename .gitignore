@@ -1,5 +1,11 @@
+# environmental secrets
 .env
+
+# Python 
 __pycache__/
 .venv/
 downloads/
 test.py
+
+# Tailwind and node dependencies
+node_modules/

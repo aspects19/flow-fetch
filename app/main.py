@@ -3,15 +3,21 @@ from fastapi import FastAPI, Request, HTTPException, Depends
 from sqlalchemy.orm import Session
 import crud, models, schemas
 from pydantic import BaseModel
-from database import engine, get_db, SessionLocal
-from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
+from database import engine, get_db
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-import yt_dlp
-from modules.downloader import download_audio, download_video, get_domain, sanitize_filename
+from fastapi.middleware.gzip import GZipMiddleware
+from modules.downloader import download_video, download_audio
 
 app = FastAPI()
+
+# app.add_middleware(GZipMiddleware, minimum_size=1000, compresslevel=6)
+
+# app.mount("/static", StaticFiles(directory="static"), name="static")
+
 templates = Jinja2Templates(directory="templates")
+
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -21,7 +27,7 @@ class VideoRequest(BaseModel):
 
 @app.get("/")
 async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(name="index.html", request=request)
 
 
 @app.post("/download")
