@@ -59,7 +59,7 @@ def delete_file(f_path):
     except:
         time.sleep(5)
 
-def download_audio(video_url, output_path, thumb):
+def download_audio(video_url, output_path,):
     """Downloads audio with metadata and thumbnail."""
     
     try:
@@ -85,14 +85,15 @@ def download_audio(video_url, output_path, thumb):
     except Exception as e:
         print(f"Audio download failed: {e}")
 
-async def download_video(url ):
+async def download_video(url, resolution ):
     """Downloads video with user-selected format."""
     output_path="downloads/%(title)s.%(ext)s"
     ydl_opts = {
-            'format': 'bestvideo+bestaudio/best',
+            'format': f'bestvideo[height={resolution}]+bestaudio/best',
             'merge_output_format': 'mp4',
             'outtmpl': output_path
         }
+    print(resolution)
     try:
         
         # if domain == "instagram.com":
@@ -104,7 +105,8 @@ async def download_video(url ):
             video_info = ydl.extract_info(url, download=True)
             video_file = ydl.prepare_filename(video_info)
 
-        print(video_file)
+        # video_file = "/downloads/1 Second Video.mp4"
+        
         return str(video_file)
        
     except Exception as e:
