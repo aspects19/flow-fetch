@@ -1,5 +1,5 @@
 # FlowFetch
-FastFlow is a **FastAPI** fullstack video downloader app.
+FlowFetch is a **FastAPI** fullstack video downloader app.
 
 ![Python](https://img.shields.io/badge/v3.12.9-blue?style=flat&logo=python&logoColor=yellow&label=python&color=yellow)
 ![FastAPI](https://img.shields.io/badge/v0.115.10-009485?style=flat&logo=fastapi&logoColor=white&label=fastapi&color=009485)
