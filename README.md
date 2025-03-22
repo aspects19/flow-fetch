@@ -1,4 +1,4 @@
-# FastFlow
+# FlowFetch
 FastFlow is a **FastAPI** fullstack video downloader app.
 
 ![Python](https://img.shields.io/badge/v3.12.9-blue?style=flat&logo=python&logoColor=yellow&label=python&color=yellow)
